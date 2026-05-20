@@ -1,0 +1,62 @@
+package simpleXOgame;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class main {
+
+	public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+		setXO x = new setXO();
+		x.XO = "x";
+		String winner = null;
+		x.trace();
+		
+		
+		System.out.println("Welcome to X O game...");
+        x.printBoard();
+        System.out.println("X will play first enter a number...");
+        
+        while(winner == null) {
+        	int numInput;
+        	
+        	try {
+        		numInput = in.nextInt();
+        		
+        		if (!(numInput > 0 && numInput <= 9)) {
+                    System.out.println("invalid number...");
+                    continue;
+                }
+        		
+        		if (x.arr[numInput - 1].equals(String.valueOf(numInput))) {
+                    x.arr[numInput - 1] = x.XO;
+                    
+                    if (x.XO.equals("x")) {
+                        x.XO = "o";
+                    } else {
+                        x.XO = "x";
+                    }
+                    
+                    x.printBoard();
+                    winner = x.winnerStrategy();
+        		} else {
+        			System.out.println("number already taked.");
+        		}
+        		
+        	} catch (InputMismatchException e) {
+                System.out.println("Invalid input; re-enter slot number:");
+                in.nextLine(); // Consume invalid input to prevent infinite loop
+        	}
+        }
+        
+        // Final result
+        if (winner.equalsIgnoreCase("tie")) {
+            System.out.println("It's a tie");
+        } else {
+            System.out.println("congrates " + winner + " you won");
+        }
+
+        in.close();
+	}
+
+}
