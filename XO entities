@@ -1,0 +1,74 @@
+package simpleXOgame;
+
+import java.util.Arrays;
+
+public class setXO {
+	public String [] arr;
+	public String XO;
+	
+	public setXO() {
+		 arr = new String[9];
+		 trace();
+	}
+	
+	public String winnerStrategy() {
+		for(int i=0; i<8; i++) {
+			String line =null;
+			
+			switch (i) {
+			case 0:
+				line = arr[0]+arr[1]+arr[2];
+				break;
+			case 1:
+				line = arr[3]+arr[4]+arr[5];
+				break;
+			case 2:
+				line = arr[6]+arr[7]+arr[8];
+				break;
+			case 3:
+				line = arr[0]+arr[3]+arr[6];
+				break;
+			case 4:
+				line = arr[1]+arr[4]+arr[7];
+				break;
+			case 5:
+				line = arr[2]+arr[5]+arr[8];
+				break;
+			case 6:
+				line = arr[0]+arr[4]+arr[8];
+				break;
+			case 7:
+				line = arr[2]+arr[4]+arr[6];
+				break;
+			}
+			
+			if(line.equals("xxx")) { return "x";}
+			if(line.equals("ooo")) { return "o";}
+				
+			}
+			for (int a = 0; a < 9; a++) {
+				if (Arrays.asList(arr).contains(String.valueOf(a + 1))) {
+					break;
+				} else if (a == 8) {
+					return "tie";
+				}
+			}
+			System.out.println("turn " + XO + " enter number");
+	        return null;
+	}
+	public void printBoard() {
+        System.out.println("|---|---|---|");
+        System.out.println("| " + arr[0] + " | " + arr[1] + " | " + arr[2] + " |");
+        System.out.println("|-----------|");
+        System.out.println("| " + arr[3] + " | " + arr[4] + " | " + arr[5] + " |");
+        System.out.println("|-----------|");
+        System.out.println("| " + arr[6] + " | " + arr[7] + " | " + arr[8] + " |");
+        System.out.println("|---|---|---|");
+    }
+	
+	public void trace() {
+		for (int a = 0; a < 9; a++) {
+            arr[a] = String.valueOf(a + 1);
+        }
+	}
+}
